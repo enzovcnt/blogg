@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+    {% for post in posts %}
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+
+                {% if app.user %}
+
+                {% if post.author == app.user %}
+
+                <h6 class="card-subtitle mb-2 text-body-secondary">c'est toi</h6>
+
+                {% endif %}
+                {% endif %}
+                <h6 class="card-subtitle mb-2 text-body-secondary">{{ post.author.email }}</h6>
+                <p class="card-text">{{ post.content }}</p>
+                <a href="{{ path('app_post_show', {id:post.id}) }}" class="card-link">voir</a>
+            </div>
+        </div>
+
+
+    {% endfor %}
+{% endblock %}
