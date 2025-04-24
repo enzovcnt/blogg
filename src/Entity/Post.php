@@ -29,7 +29,7 @@ class Post
     /**
      * @var Collection<int, Image>
      */
-    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'post')]
+    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'post', orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $images;
 
     /**
