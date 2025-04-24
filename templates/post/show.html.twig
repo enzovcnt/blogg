@@ -50,6 +50,13 @@
                 <div class="border-blue border">
                     <p>Auteur : {{ comment.author.email }}</p>
                     <p>{{ comment.content }}</p>
+                    {% if app.user %}
+                    {% if post.author == app.user %}
+
+                    <a href="{{ path('app_comment_delete', {id:comment.id}) }}">Supprimer</a>
+                    <a href="{{ path('app_comment_edit', {id:comment.id}) }}">edit</a>
+                    {% endif %}
+                    {% endif %}
 
                 </div>
 
