@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="images d-flex justify-content-around align-items-center">
+        {% for image in post.images %}
+            <div class="d-flex flex-column justify-content-around align-items-center">
+                <img src="{{ vich_uploader_asset(image, "imageFile") | imagine_filter('thumbnail') }}" alt="">
+                <a href="{{ path('app_removeImage',{id:image.id}) }}" class="btn btn-danger">X</a>
+
+            </div>
+
+        {% endfor %}
+    </div>
+
+
+    {{ form_start(formImage) }}
+    {{ form_row(formImage.imageFile) }}
+    <button type="submit" class="btn btn-success">send</button>
+    {{ form_end(formImage) }}
+
+    <a href="{{ path('app_post_show', {id:post.id}) }}" class="card-link">retour</a>
+
+{% endblock %}

@@ -9,6 +9,12 @@
 
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
+
+                    {% for image in post.images %}
+
+                    <img src="{{ vich_uploader_asset(image, "imageFile") | imagine_filter('show') }}" alt="">
+                    {% endfor %}
+
                     <h5 class="card-title">{{ post.title }}</h5>
 
                     {% if app.user %}
@@ -22,6 +28,9 @@
                     <h6 class="card-subtitle mb-2 text-body-secondary">{{ post.author.email }}</h6>
                     <p class="card-text">{{ post.content }}</p>
                     <a href="{{ path('app_post') }}">retour</a>
+                    {% if post.author == app.user %}
+                    <a href="{{ path('app_post_addimage', {id: post.id}) }}">ajouter image</a>
+                    {% endif %}
                 </div>
             </div>
 
