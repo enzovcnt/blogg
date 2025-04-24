@@ -91,7 +91,7 @@ final class PostController extends AbstractController
         {
             return $this->redirectToRoute('app_login');
         }
-        if($post->getAuthor() !== $this->getUser())
+        if($post->getAuthor() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN'))
         {
             return $this->redirectToRoute('app_post_show', ['id' => $post->getId()]);
         }

@@ -29,7 +29,7 @@
                     <p class="card-text">{{ post.content }}</p>
                     <a href="{{ path('app_post') }}">retour</a>
                     {% if app.user %}
-                    {% if post.author == app.user %}
+                    {% if post.author == app.user or "ROLE_ADMIN" in app.user.roles %}
                     <a href="{{ path('app_post_addimage', {id: post.id}) }}">ajouter image</a>
                     <a href="{{ path('app_post_edit', {id: post.id}) }}">Edit</a>
                     {% endif %}
@@ -52,7 +52,7 @@
                     <p>Auteur : {{ comment.author.email }}</p>
                     <p>{{ comment.content }}</p>
                     {% if app.user %}
-                    {% if post.author == app.user %}
+                    {% if post.author == app.user or "ROLE_ADMIN" in app.user.roles %}
 
                     <a href="{{ path('app_comment_delete', {id:comment.id}) }}">Supprimer</a>
                     <a href="{{ path('app_comment_edit', {id:comment.id}) }}">edit</a>
