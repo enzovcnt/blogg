@@ -28,11 +28,33 @@
                     <h6 class="card-subtitle mb-2 text-body-secondary">{{ post.author.email }}</h6>
                     <p class="card-text">{{ post.content }}</p>
                     <a href="{{ path('app_post') }}">retour</a>
+                    {% if app.user %}
                     {% if post.author == app.user %}
                     <a href="{{ path('app_post_addimage', {id: post.id}) }}">ajouter image</a>
                     {% endif %}
+                    {% endif %}
                 </div>
             </div>
+
+        <div>
+            <p>Add comment</p>
+            {{ form_start(form,{'action': path('app_comment', {id:post.id}), 'method': 'POST'}) }}
+            {{ form_row(form.content) }}
+            <button type="submit">Envoyer</button>
+            {{ form_end(form) }}
+
+        </div>
+        <div>
+            {% for comment in post.comments %}
+
+                <div class="border-blue border">
+                    <p>Auteur : {{ comment.author.email }}</p>
+                    <p>{{ comment.content }}</p>
+
+                </div>
+
+            {% endfor %}
+        </div>
 
 
 
