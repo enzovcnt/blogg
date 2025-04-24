@@ -3,5 +3,51 @@
 {% block title %}Hello ProfileController!{% endblock %}
 
 {% block body %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">email</th>
+            <th scope="col">role</th>
 
+        </tr>
+        </thead>
+        <tbody>
+
+
+        {% for user in users %}
+            <tr>
+                <th scope="row">{{ user.id }}</th>
+                <td>{{ user.email }}</td>
+                <td> {% for role in user.roles %}
+                        {% if role == 'ROLE_USER' %}
+                            <span class="badge rounded-pill text-bg-info">User</span>
+                        {% elseif role == 'ROLE_ADMIN' %}
+
+                            <span class="badge rounded-pill text-bg-success">Admin</span>
+
+                        {% endif %}
+                    {% endfor %}
+                    {% if user == app.user %}
+                        <span class="badge rounded-pill text-bg-warning">moi</span>
+
+                    {% endif %}</td>
+
+                <td>
+                    {% if 'ROLE_ADMIN' not in user.roles %}
+
+                        <a href="{{ path('app_profile_promote', {id:user.id}) }}" class="btn btn-success">Promote</a>
+
+                    {% else %}
+
+                        <a href="{{ path('app_profile_demote', {id:user.id}) }}" class="btn btn-danger">Demote</a>
+
+                    {% endif %}
+
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
 {% endblock %}

@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class PostController extends AbstractController
 {
-    #[Route('/posts', name: 'app_post')]
+    #[Route('/', name: 'app_post')]
     public function index(PostRepository $postRepository): Response
     {
         return $this->render('post/index.html.twig', [

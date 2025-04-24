@@ -15,23 +15,23 @@
         <tbody>
 
 
-            {% for user in users %}
-        <tr>
-            <th scope="row">{{ user.id }}</th>
-            <td>{{ user.email }}</td>
-            <td> {% for role in user.roles %}
-                    {% if role == 'ROLE_USER' %}
-                        <span class="badge rounded-pill text-bg-info">User</span>
-                    {% elseif role == 'ROLE_ADMIN' %}
+        {% for user in users %}
+            <tr>
+                <th scope="row">{{ user.id }}</th>
+                <td>{{ user.email }}</td>
+                <td> {% for role in user.roles %}
+                        {% if role == 'ROLE_USER' %}
+                            <span class="badge rounded-pill text-bg-info">User</span>
+                        {% elseif role == 'ROLE_ADMIN' %}
 
-                        <span class="badge rounded-pill text-bg-success">Admin</span>
+                            <span class="badge rounded-pill text-bg-success">Admin</span>
 
-                    {% endif %}
-                {% endfor %}
-                {% if user == app.user %}
-                    <span class="badge rounded-pill text-bg-warning">moi</span>
+                        {% endif %}
+                    {% endfor %}
+                    {% if user == app.user %}
+                        <span class="badge rounded-pill text-bg-warning">moi</span>
 
-                {% endif %}</td>
+                    {% endif %}</td>
 
                 <td>
                     {% if 'ROLE_ADMIN' not in user.roles %}
@@ -45,8 +45,8 @@
                     {% endif %}
 
                 </td>
-        </tr>
-            {% endfor %}
+            </tr>
+        {% endfor %}
 
         </tbody>
     </table>
