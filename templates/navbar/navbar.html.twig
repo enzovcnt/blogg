@@ -20,6 +20,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_post') }}">Posts</a>
                     </li>
+
+
+                    {% if app.user and  "ROLE_ADMIN" in app.user.roles %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_admin_users') }}">Admin</a>
+                    </li>
+                    {% endif %}
+
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{ path('app_login') }}">login</a>
@@ -28,6 +36,7 @@
                             <a class="nav-link" href="{{ path('app_register') }}">Register</a>
                         </li>
                 {% endif %}
+
 
             </ul>
         </div>

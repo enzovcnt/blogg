@@ -6,16 +6,18 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>id</th>
-            <th>email</th>
-            <th>role</th>
+            <th scope="col">id</th>
+            <th scope="col">email</th>
+            <th scope="col">role</th>
 
         </tr>
         </thead>
         <tbody>
-        <tr>
+
+
             {% for user in users %}
-            <td>{{ user.id }}</td>
+        <tr>
+            <th scope="row">{{ user.id }}</th>
             <td>{{ user.email }}</td>
             <td> {% for role in user.roles %}
                     {% if role == 'ROLE_USER' %}
@@ -43,8 +45,9 @@
                     {% endif %}
 
                 </td>
-
-            {% endfor %}
         </tr>
+            {% endfor %}
 
+        </tbody>
+    </table>
 {% endblock %}
