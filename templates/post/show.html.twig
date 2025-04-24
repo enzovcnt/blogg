@@ -31,6 +31,7 @@
                     {% if app.user %}
                     {% if post.author == app.user %}
                     <a href="{{ path('app_post_addimage', {id: post.id}) }}">ajouter image</a>
+                    <a href="{{ path('app_post_edit', {id: post.id}) }}">Edit</a>
                     {% endif %}
                     {% endif %}
                 </div>
@@ -55,6 +56,7 @@
 
                     <a href="{{ path('app_comment_delete', {id:comment.id}) }}">Supprimer</a>
                     <a href="{{ path('app_comment_edit', {id:comment.id}) }}">edit</a>
+
                     {% endif %}
                     {% endif %}
 

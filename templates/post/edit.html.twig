@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(formEditPost) }}
+    {{ form_row(formEditPost.title) }}
+    {{ form_row(formEditPost.content) }}
+    <button type="submit">Edit</button>
+    {{ form_end(formEditPost) }}
+
+
+{% endblock %}

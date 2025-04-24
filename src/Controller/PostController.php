@@ -59,6 +59,31 @@ final class PostController extends AbstractController
         ]);
     }
 
+    #[Route('/post/{id}/edit', name: 'app_post_edit', priority: -1)]
+    public function edit(Post $post, EntityManagerInterface $manager, Request $request): Response
+    {
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($post);
+            $manager->flush();
+            return $this->redirectToRoute('app_post_show', ['id' => $post->getId()]);
+        }
+        return $this->render('post/edit.html.twig', [
+            'post' => $post,
+            'formEditPost' => $form->createView(),
+        ]);
+
+    }
+
+    #[Route('/post/{id}/delete', name: 'app_post_delete',)]
+    public function delete(Post $post, EntityManagerInterface $manager,): Response
+    {
+        $manager->remove($post);
+        $manager->flush();
+        return $this->redirectToRoute('app_post');
+    }
+
     #[Route('/post/addimage/{id}', name: 'app_post_addimage')]
     public function addImage(Post $post, Request $request, EntityManagerInterface $manager) : Response
     {
@@ -88,7 +113,7 @@ final class PostController extends AbstractController
     }
 
     #[Route('/post/removeImage/{id}', name: 'app_removeImage')]
-    public function removeImage(Image $image, Request $request, EntityManagerInterface $manager) : Response
+    public function removeImage(Image $image, EntityManagerInterface $manager) : Response
     {
         if(!$this->getUser() || !$image)
         {
